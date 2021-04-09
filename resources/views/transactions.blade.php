@@ -1,7 +1,7 @@
 <x-dashboard-layout>
     <x-slot name="header">
-        Dashboard
+        Transactions
     </x-slot>
 
-    Wykresik
+    Lista transakcji i przycisk do wprowadzenia kolejnej
 </x-dashboard-layout>

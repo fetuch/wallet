@@ -20,18 +20,16 @@
 
     <body class="flex flex-col font-sans antialiased">
         <div class="flex-1 relative bg-gray-100">
-            @include('layouts._partials.header')
+            @include('layouts.shared.navbar')
 
             {{ $hero ?? '' }}
 
             <!-- Page Content -->
             <main class="">
-
-
                 {{ $slot }}
             </main>
         </div>
 
-        @include('layouts._partials.footer')
+        @include('layouts.shared.footer')
     </body>
 </html>
