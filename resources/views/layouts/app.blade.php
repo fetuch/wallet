@@ -19,7 +19,7 @@
     </head>
 
     <body class="flex flex-col font-sans antialiased">
-        <div class="flex-1 relative bg-gray-100">
+        <div class="flex-1 relative">
             @include('layouts.shared.navbar')
 
             {{ $hero ?? '' }}

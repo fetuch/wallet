@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomepageController::class, 'invoke'])->name('homepage');
 
 Route::middleware(['auth'])->group(function() {
-    Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)
-        ->name('dashboard');
+    Route::get('/home', \App\Http\Controllers\HomeController::class)
+        ->name('home');
 
     Route::get('/transactions', [\App\Http\Controllers\TransactionsController::class, 'index'])
         ->name('transactions.index');

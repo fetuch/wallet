@@ -34,49 +34,8 @@
                         </svg>
                     </button>
 
-                    <div
-                        x-data="{ open: false }"
-                        class="ml-4 relative flex-shrink-0"
-                    >
-                        <div>
-                            <button
-                                @click="open = true"
-                                type="button"
-                                class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                id="user-menu"
-                                aria-expanded="false"
-                                aria-haspopup="true"
-                            >
-                                <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="">
-
-                            </button>
-                        </div>
-
-                        <div
-                            x-show="open"
-                            @click.away="open = false"
-                            x-transition:enter="transition ease-out duration-100 transform"
-                            x-transition:enter-start="opacity-0 scale-95"
-                            x-transition:enter-end="opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-75 transform"
-                            x-transition:leave-start="opacity-100 scale-100"
-                            x-transition:leave-end="opacity-0 scale-95"
-                            class="origin-top-right z-40 absolute -right-2 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                            role="menu"
-                            aria-orientation="vertical"
-                            aria-labelledby="user-menu"
-                        >
-                            <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">{{ __('Dashboard') }}</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">{{ __('Your Profile') }}</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">{{ __('Settings') }}</a>
-                            <span onclick="javascript: document.querySelector('#logout-form').submit()" class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">{{ __('Sign out') }}</span>
-
-                            <form id="logout-form" method="POST" action="/logout">
-                                @csrf
-                            </form>
-                        </div>
-                    </div>
+                    <!-- Profile dropdown -->
+                    @include('layouts.shared.profile-dropdown')
                 @else
                     <a href="{{ route('login') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         {{ __('Sign in') }}
