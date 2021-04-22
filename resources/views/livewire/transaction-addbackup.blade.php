@@ -1,36 +1,14 @@
 <form wire:submit.prevent="submit">
     <div class="p-4 sm:p-6">
-        <div class="">
-            <div class="flex justify-between">
+        <div class="mb-3">
+            <div class="flex justify-between mb-1">
                 <label for="asset" class="block text-sm font-medium text-gray-700">{{ ucfirst(__('asset')) }}</label>
-                <span class="text-xs text-gray-500">{{ __('Required') }}</span>
+                <span class="text-xs text-gray-500" id="asset-optional">{{ __('Required') }}</span>
             </div>
 
-            <div
-                class="relative mt-1"
-            >
-                <select
-                    id="asset"
-                    name="asset"
-                    wire:model="asset"
-                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm rounded-md"
-                >
-                    <option value="" disabled >{{ ucfirst(__('select')) }}</option>
-                    @foreach($assets as $asset)
-                        <option value="{{ $asset->id }}">{{ $asset->name }}</option>
-                    @endforeach
-                </select>
-                @error('asset')
-                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <!-- Heroicon name: solid/exclamation-circle -->
-                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                @enderror
-            </div>
+            <livewire:asset-autocomplete/>
 
-            <p class="mt-2 text-xs text-gray-500" id="asset-description">{{ ucfirst(__('fiat currency')) }}</p>
+            <p class="mt-2 text-xs text-gray-500" id="asset-description">{{ ucfirst(__('currencies, commodities, shares...')) }}</p>
 
             @error('asset') <span class="mt-2 text-xs text-red-600">{{ $message }}</span> @enderror
         </div>
@@ -47,7 +25,7 @@
                     type="text"
                     name="quantity"
                     id=quantity"
-                    class="shadow-sm focus:ring-cyan-500 focus:border-cyan-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    class="shadow-sm focus:ring-cyan-500 focus:border-cyan-500 block w-full sm:text-sm border-gray-300 @error('asset') border-red-500 pr-10 @enderror rounded-md"
                     placeholder="1"
                     aria-describedby="quantity-description"
                 >

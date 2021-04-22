@@ -6,7 +6,13 @@ use Livewire\Component;
 
 class NewTransaction extends Component
 {
+    public $visible = false;
     public $activeTab = 'ADD';
+
+    public function close()
+    {
+        $this->visible = false;
+    }
 
     public function setActiveTab($value)
     {

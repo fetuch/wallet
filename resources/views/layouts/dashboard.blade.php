@@ -21,18 +21,18 @@
 
     <body class="font-sans antialiased">
         <div
-            x-data="{ offCanvasMenu: false, slideOverlay: true }"
+            x-data="{ offCanvasMenu: false, slideOverlay: false }"
             class="h-screen flex overflow-hidden bg-gray-100"
         >
             @include('layouts.dashboard.off-canvas-menu')
 
-            <livewire:new-transaction />
+{{--            <livewire:new-transaction />--}}
 
             <!-- Static sidebar for desktop -->
             @include('layouts.dashboard.static-sidebar')
 
             <div class="flex-1 overflow-auto focus:outline-none" tabindex="0">
-                <div class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:border-none">
+                <div class="relative flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:border-none">
                     <button
                         @click="offCanvasMenu = true"
                         class="px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 lg:hidden">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <main class="flex-1 relative pb-8 z-0 overflow-y-auto">
+                <main class="flex-1 pb-8 z-0 overflow-y-auto">
                     @include('layouts.dashboard.header')
 
                     <div class="mt-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,6 +86,8 @@
                 </main>
             </div>
         </div>
+
+        <livewire:notification />
 
         <livewire:scripts />
     </body>
