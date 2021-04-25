@@ -48,7 +48,7 @@ class WalletService
             ->log('You have added ' . $quantity . ' ' . $asset->name . ' to your wallet');
     }
 
-    public function computeBalance()
+    public function computeValuation()
     {
         $balance = 0;
 

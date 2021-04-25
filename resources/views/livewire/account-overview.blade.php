@@ -16,11 +16,11 @@
                     <div class="ml-5 w-0 flex-1">
                         <dl>
                             <dt class="text-sm font-medium text-gray-500 truncate">
-                                {{ ucfirst(__('account balance')) }}
+                                {{ ucfirst(__('account valuation')) }}
                             </dt>
                             <dd>
                                 <div class="flex items-baseline text-lg font-medium text-gray-900">
-                                    <span>{{ $balance }} PLN</span>
+                                    <span>{{ $valuation }} PLN</span>
 
                                     <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
                                         <svg class="self-center flex-shrink-0 h-5 w-5 text-green-500"

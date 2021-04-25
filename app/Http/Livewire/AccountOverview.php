@@ -7,13 +7,13 @@ use Livewire\Component;
 
 class AccountOverview extends Component
 {
-    public $balance = 0;
+    public $valuation = 0;
 
-    protected $listeners = ['CurrencyAdded' => 'computeBalance'];
+    protected $listeners = ['CurrencyAdded' => 'computeValuation'];
 
     public function mount(WalletService $walletService)
     {
-        $this->balance = $walletService->computeBalance();
+        $this->valuation = $walletService->computeValuation();
     }
 
     public function render()
@@ -21,8 +21,8 @@ class AccountOverview extends Component
         return view('livewire.account-overview');
     }
 
-    public function computeBalance(WalletService $walletService)
+    public function computeValuation(WalletService $walletService)
     {
-        $this->balance = $walletService->computeBalance();
+        $this->valuation = $walletService->computeValuation();
     }
 }
