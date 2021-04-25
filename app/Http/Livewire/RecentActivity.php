@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Asset;
-use App\Models\Transaction;
 use Livewire\Component;
+use Spatie\Activitylog\Models\Activity;
 
 class RecentActivity extends Component
 {
@@ -17,7 +16,7 @@ class RecentActivity extends Component
     public $currentPage = 1;
     public $hasMorePages;
 
-    protected $listeners = ['CashAdded' => 'fetchActivities'];
+    protected $listeners = ['CurrencyAdded' => 'fetchActivities'];
 
     public function mount()
     {
@@ -33,8 +32,8 @@ class RecentActivity extends Component
 
     public function fetchActivities()
     {
-        $paginator = Transaction::where('user_id', auth()->id())->latest()->paginate($this->perPage, $columns = ['*'], $pageName = 'page', $page = $this->currentPage);
-        //dd($paginator);
+        $paginator = Activity::where('causer_id', auth()->id())->latest()->paginate($this->perPage, $columns = ['*'], $pageName = 'page', $page = $this->currentPage);
+
         $this->activities = $paginator->items();
         $this->total = $paginator->total();
         $this->first = $paginator->firstItem();

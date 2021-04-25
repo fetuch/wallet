@@ -4,7 +4,7 @@
         type="button"
         class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
     >
-        {{ __('Add cash') }}
+        {{ ucwords(__('add currency')) }}
     </button>
 
     <div
@@ -45,7 +45,7 @@
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="">
                             <div class="flex justify-between">
-                                <label for="asset" class="block text-sm font-medium text-gray-700">{{ ucfirst(__('asset')) }}</label>
+                                <label for="currency" class="block text-sm font-medium text-gray-700">{{ ucfirst(__('currency')) }}</label>
                                 <span class="text-xs text-gray-500">{{ __('Required') }}</span>
                             </div>
 
@@ -53,17 +53,17 @@
                                 class="relative mt-1"
                             >
                                 <select
-                                    id="asset"
-                                    name="asset"
-                                    wire:model="asset"
+                                    id="currency"
+                                    name="currency"
+                                    wire:model="currency"
                                     class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm rounded-md"
                                 >
                                     <option value="" disabled >{{ ucfirst(__('select')) }}</option>
-                                    @foreach($assets as $asset)
-                                        <option value="{{ $asset->id }}">{{ $asset->name }}</option>
+                                    @foreach($currencies as $currency)
+                                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('asset')
+                                @error('currency')
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <!-- Heroicon name: solid/exclamation-circle -->
                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -73,9 +73,9 @@
                                 @enderror
                             </div>
 
-                            <p class="mt-2 text-xs text-gray-500" id="asset-description">{{ ucfirst(__('fiat currency')) }}</p>
+                            <p class="mt-2 text-xs text-gray-500" id="currency-description">{{ ucfirst(__('fiat currency')) }}</p>
 
-                            @error('asset') <span class="mt-2 text-xs text-red-600">{{ $message }}</span> @enderror
+                            @error('currency') <span class="mt-2 text-xs text-red-600">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="mt-3">
@@ -104,7 +104,7 @@
                                 @enderror
                             </div>
 
-                            <p class="mt-2 text-xs text-gray-500" id="quantity-description">{{ ucfirst(__('the quantity of asset you add')) }}</p>
+                            <p class="mt-2 text-xs text-gray-500" id="quantity-description">{{ ucfirst(__('the quantity of currency you add')) }}</p>
 
                             @error('quantity') <span class="mt-2 text-xs text-red-600">{{ $message }}</span> @enderror
                         </div>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,8 +14,6 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $transactions = Transaction::where('user_id', auth()->id())->latest()->paginate(5);
-
-        return view('home', compact('transactions'));
+        return view('home');
     }
 }

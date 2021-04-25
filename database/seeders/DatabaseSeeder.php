@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(1)->create(['email' => 'rano@lptg.pl']);
         User::factory(100)->create();
-        $this->call(AssetTableSeeder::class);
+        $this->call(ResourcesTableSeeder::class);
     }
 }

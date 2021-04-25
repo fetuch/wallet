@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Asset extends Model
+class Resource extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name', 'quantity', 'user_id', 'resource_id'];
 }

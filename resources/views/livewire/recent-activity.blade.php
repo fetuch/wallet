@@ -60,51 +60,30 @@
                     <thead>
                     <tr>
                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Transaction
+                            {{ ucfirst(__('description')) }}
                         </th>
-                        <th class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Amount
-                        </th>
-                        <th class="hidden px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:block">
-                            Status
-                        </th>
+
                         <th class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Date
                         </th>
                     </tr>
                     </thead>
+
                     <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach($activities as $transaction)
+                    @foreach($activities as $activity)
                         <tr class="bg-white">
                             <td class="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 <div class="flex">
-                                    <a href="#" class="group inline-flex space-x-2 truncate text-sm">
-                                        <!-- Heroicon name: solid/cash -->
-                                        <svg class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                             aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                  d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                                                  clip-rule="evenodd"/>
-                                        </svg>
+                                    <span class="group inline-flex space-x-2 truncate text-sm">
                                         <p class="text-gray-500 truncate group-hover:text-gray-900">
-                                            {{ $transaction->quantity }} {{ $transaction->asset_name }} added
+                                            {{ $activity->description }}
                                         </p>
-                                    </a>
+                                    </span>
                                 </div>
                             </td>
+
                             <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                <span class="text-gray-900 font-medium">{{ $transaction->quantity }}</span>
-                                {{ $transaction->asset_name }}
-                            </td>
-                            <td class="hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block">
-                            <span
-                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
-                              {{ $transaction->type }}
-                            </span>
-                            </td>
-                            <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                <time datetime="2020-07-11">{{ $transaction->created_at->diffForHumans(null, true) }}</time>
+                                <time datetime="2020-07-11">{{ $activity->created_at->diffForHumans(null, true) }}</time>
                             </td>
                         </tr>
                     @endforeach
@@ -113,8 +92,10 @@
 
                 <!-- Pagination -->
                 @if($activities)
-                <nav class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-                     aria-label="Pagination">
+                <nav
+                    class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+                    aria-label="Pagination"
+                >
                     <div class="hidden sm:block">
                         <p class="text-sm text-gray-700">
                             Showing
@@ -126,6 +107,7 @@
                             results
                         </p>
                     </div>
+
                     <div class="flex-1 flex justify-between sm:justify-end">
                         @if($currentPage !== 1)
                             <span

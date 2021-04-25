@@ -18,12 +18,12 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('user_id')->index();
             $table->string('type');
             $table->string('asset_name');
-            $table->unsignedBigInteger('assetable_id')->nullable();
-            $table->string('assetable_type')->nullable();
+            $table->unsignedBigInteger('resourcable_id')->nullable();
+            $table->string('resourcable_type')->nullable();
             $table->double('quantity', 18,8);
             $table->timestamps();
 
-            $table->index(['assetable_id', 'assetable_type'], 'quotable');
+            $table->index(['resourcable_id', 'resourcable_type'], 'resourcable');
         });
     }
 

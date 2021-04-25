@@ -40,4 +40,31 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function assets()
+    {
+        return $this->hasMany(Asset::class);
+    }
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    public function hasAsset($name)
+    {
+        return $this->assets()
+            ->where('name', $name)
+            ->exists();
+    }
+
+    /**
+     * @param $name
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\HasMany|object|null
+     */
+    public function getAssetByName($name)
+    {
+        return $this->assets()
+            ->where('name', $name)
+            ->first();
+    }
 }

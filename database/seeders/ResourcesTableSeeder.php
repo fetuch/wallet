@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AssetTableSeeder extends Seeder
+class ResourcesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class AssetTableSeeder extends Seeder
      */
     public function run()
     {
-        $query = "INSERT INTO `assets` (`name`, `type`, `created_at`, `updated_at`) VALUES
+        $query = "INSERT INTO `resources` (`name`, `type`, `created_at`, `updated_at`) VALUES
 ('PLN', 'fiat currency', '2020-12-07 22:43:20', '2020-12-07 22:43:20'),
 ('THB', 'fiat currency', '2020-12-07 22:43:20', '2020-12-07 22:43:20'),
 ('USD', 'fiat currency', '2020-12-07 22:43:20', '2020-12-07 22:43:20'),
