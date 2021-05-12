@@ -10,4 +10,14 @@ class Asset extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'quantity', 'user_id', 'resource_id'];
+
+    public function resource()
+    {
+        return $this->belongsTo(Resource::class);
+    }
+
+    public function valuations()
+    {
+        return $this->morphMany(Valuation::class, 'valuationable');
+    }
 }

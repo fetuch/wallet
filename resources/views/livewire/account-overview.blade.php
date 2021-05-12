@@ -85,11 +85,11 @@
                     <div class="ml-5 w-0 flex-1">
                         <dl>
                             <dt class="text-sm font-medium text-gray-500 truncate">
-                                Total trades
+                                Total assets
                             </dt>
                             <dd>
                                 <div class="text-lg font-medium text-gray-900">
-                                    59 Trades <span class="text-sm font-medium text-gray-500">(with 13 Coins)</span>
+                                    59 Assets
                                 </div>
                             </dd>
                         </dl>

@@ -1,3 +1,3 @@
 <x-dashboard-layout>
-    home
+    index
 </x-dashboard-layout>

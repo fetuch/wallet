@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Resource;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -53,5 +54,12 @@ class ResourcesTableSeeder extends Seeder
 ('XDR', 'fiat currency', '2020-12-07 22:43:21', '2020-12-07 22:43:21');";
 
         DB::statement($query);
+
+        \App\Models\Valuation::create([
+            'valuationable_id' => 1,
+            'valuationable_type' => Resource::class,
+            'date' => now(),
+            'amount' => 1
+        ]);
     }
 }

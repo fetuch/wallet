@@ -14,6 +14,6 @@ class AssetAutocomplete extends Autocomplete
     }
 
     public function query() {
-        return Asset::where('name', 'like', '%'.$this->search.'%')->orderBy('name');
+        return auth()->user()->assets()->where('name', 'like', '%'.$this->search.'%')->orderBy('name');
     }
 }

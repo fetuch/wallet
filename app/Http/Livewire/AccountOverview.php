@@ -9,7 +9,7 @@ class AccountOverview extends Component
 {
     public $valuation = 0;
 
-    protected $listeners = ['CurrencyAdded' => 'computeValuation'];
+    protected $listeners = ['investment-activity' => 'computeValuation'];
 
     public function mount(WalletService $walletService)
     {

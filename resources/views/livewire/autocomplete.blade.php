@@ -41,10 +41,10 @@
                     wire:model.debounce.300ms="search"
                     x-on:keydown.arrow-down.stop.prevent="highlightNext()"
                     x-on:keydown.arrow-up.stop.prevent="highlightPrevious()"
-                    x-on:keydown.enter.stop.prevent="$dispatch('value-selected', {
+                    x-on:keydown.enter.stop.prevent="$refs.results.children[highlightedIndex] ? $dispatch('value-selected', {
                         id: $refs.results.children[highlightedIndex].getAttribute('data-result-id'),
                         name: $refs.results.children[highlightedIndex].getAttribute('data-result-name')
-                      })"
+                      }) : null"
                     class="shadow-sm focus:ring-cyan-500 focus:border-cyan-500 block w-full text-sm border-gray-300 rounded-md"
                     placeholder="Start typing"
                     aria-describedby="asset-description"
@@ -87,7 +87,7 @@
                             </span>
                         </li>
                     @empty
-                        <li class="px-3 py-1">No results found</li>
+{{--                        <li class="px-3 py-1">No results found</li>--}}
                     @endforelse
                 </ul>
             </div>

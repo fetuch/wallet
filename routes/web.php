@@ -13,15 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomepageController::class, 'invoke'])->name('homepage');
+Route::get('/', function () {
+    return view('homepage');
+})->name('homepage');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/home', \App\Http\Controllers\HomeController::class)
         ->name('home');
 
-    Route::get('/transactions', [\App\Http\Controllers\TransactionsController::class, 'index'])
-        ->name('transactions.index');
+    Route::get('/investments', \App\Http\Controllers\InvestmentsController::class)
+        ->name('investments.index');
+
+    Route::get('/investments/assets', [\App\Http\Controllers\Investments\AssetsController::class, 'index'])
+        ->name('investments.assets.index');
+
+    Route::get('/investments/transactions', [\App\Http\Controllers\TransactionsController::class, 'index'])
+        ->name('investments.transactions.index');
+
+    Route::get('investments/transactions/create', [\App\Http\Controllers\TransactionsController::class, 'create'])
+        ->name('transactions.create');
 });
 
+Route::get('nbp/{day?}', function($day = null) {
+    (new \App\Services\NBPCurrenciesService())->fetch($day);
+    //(new \App\Services\NBPCurrenciesService())->fetchPeriod('2021-04-19', '2021-04-25');
+});
 
 require __DIR__.'/auth.php';

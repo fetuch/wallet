@@ -18,9 +18,12 @@ class AddCurrency extends Component
         'currency' => 'required|exists:resources,id',
     ];
 
-    public function mount()
+    public function updatedShowModal()
     {
-        $this->currencies = Resource::whereType('fiat currency')->orderBy('name')->get();
+        if($this->showModal & !$this->currencies)
+        {
+            $this->currencies = Resource::whereType('fiat currency')->orderBy('name')->get();
+        }
     }
 
     public function render()
@@ -36,7 +39,7 @@ class AddCurrency extends Component
 
         $walletService->addCurrency($resource, $this->quantity);
 
-        $this->emit('CurrencyAdded');
+        $this->emit('investment-activity');
 
         //$this->emit('notify', [
         //    'title' => 'You have added ' . $this->quantity . ' ' . $asset->name . ' to your wallet',

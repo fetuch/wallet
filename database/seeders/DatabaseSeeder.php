@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory(1)->create(['email' => 'rano@lptg.pl']);
-        User::factory(100)->create();
+
         $this->call(ResourcesTableSeeder::class);
+        //$this->call(ValuationsTableSeeder::class);
     }
 }

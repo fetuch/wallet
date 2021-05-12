@@ -16,7 +16,7 @@ class RecentActivity extends Component
     public $currentPage = 1;
     public $hasMorePages;
 
-    protected $listeners = ['CurrencyAdded' => 'fetchActivities'];
+    protected $listeners = ['investment-activity' => 'fetchActivities'];
 
     public function mount()
     {

@@ -67,4 +67,13 @@ class User extends Authenticatable
             ->where('name', $name)
             ->first();
     }
+
+    public function currencies()
+    {
+        return $this->assets()
+            ->with('resource')
+            ->whereHas('resource', function($query) {
+                $query->whereType('fiat currency');
+            });
+    }
 }

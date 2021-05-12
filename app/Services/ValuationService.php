@@ -12,9 +12,18 @@ class ValuationService
      */
     public function valuate(Asset $asset)
     {
-        // if resource is connected to asset take that asset latest valuation
-        // return valuation in users default currency b
+        $userCurrencyValuation = 0;
+        // if asset is connected to resource take that resource latest valuation
+        // return valuation in users default currency
+        if($asset->resource)
+        {
+            $valuation = optional($asset->resource->valuations()->latest('date')->first())->amount;
 
-        return 5;
+            $assetCurrency = $asset->resource->currency;
+
+            $userCurrencyValuation = $valuation * optional($assetCurrency->valuations()->latest('date')->first())->amount;
+        }
+
+        return $userCurrencyValuation;
     }
 }

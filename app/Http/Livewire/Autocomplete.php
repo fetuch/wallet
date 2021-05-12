@@ -26,6 +26,8 @@ abstract class Autocomplete extends Component
 
     public function updatedSearch()
     {
+        $this->emitUp('valueSearch', $this->search);
+
         if (strlen($this->search) < 2) {
             $this->results = collect();
             $this->showDropdown = false;

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Events\CurrencyAdded;
 use App\Models\Asset;
 use App\Models\Resource;
 
@@ -28,35 +27,70 @@ class WalletService
      */
     public function addCurrency(Resource $resource, $quantity)
     {
-        if ($asset= $this->user->getAssetByName($resource->name))
+        if ($asset = $this->user->getAssetByName($resource->name))
         {
             $asset->update([
-                'quantity' => $resource->quantity += $quantity
+                'quantity' => $asset->quantity += $quantity
             ]);
         } else {
             $asset = Asset::create([
                 'name' => $resource->name,
                 'user_id' => $this->user->id,
-                'resourced_id' => $resource->id,
+                'resource_id' => $resource->id,
                 'quantity' => $quantity,
             ]);
         }
 
-        activity()
+        activity('investments')
             ->causedBy(auth()->user())
             ->performedOn($asset)
             ->log('You have added ' . $quantity . ' ' . $asset->name . ' to your wallet');
     }
 
+    public function buy($assetName, $assetQuantity, $currency, $currencyQuantity)
+    {
+        if ($asset= $this->user->getAssetByName($assetName))
+        {
+            $asset->update([
+                'quantity' => $asset->quantity += $assetQuantity
+            ]);
+        } else {
+            $asset = Asset::create([
+                'name' => $assetName,
+                'user_id' => $this->user->id,
+                'quantity' => $assetQuantity,
+            ]);
+        }
+
+        if ($userCurrency= $this->user->currencies()->where('resource_id', $currency->id)->first())
+        {
+            $userCurrency->update([
+                'quantity' => $userCurrency->quantity -= $currencyQuantity
+            ]);
+        } else {
+            Asset::create([
+                'name' => $currency->name,
+                'user_id' => $this->user->id,
+                'resource_id' => $currency->id,
+                'quantity' => - $currencyQuantity,
+            ]);
+        }
+
+        activity('investments')
+            ->causedBy(auth()->user())
+            ->performedOn($asset)
+            ->log('You have bought ' . $assetQuantity . ' ' . $assetName . ' for ' . $currencyQuantity . ' ' . $currency->name);
+    }
+
     public function computeValuation()
     {
-        $balance = 0;
+        $valuation = 0;
 
         foreach($this->user->assets as $asset)
         {
-            $balance += $this->valuationService->valuate($asset);
+            $valuation += $asset->quantity * $this->valuationService->valuate($asset);
         }
 
-        return $balance;
+        return $valuation;
     }
 }
