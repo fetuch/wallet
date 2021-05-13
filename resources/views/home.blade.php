@@ -1,3 +1,3 @@
 <x-dashboard-layout>
-    home
+    <livewire:account-overview />
 </x-dashboard-layout>

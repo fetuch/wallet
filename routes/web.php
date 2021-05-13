@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function() {
         ->name('investments.transactions.index');
 
     Route::get('investments/transactions/create', [\App\Http\Controllers\TransactionsController::class, 'create'])
-        ->name('transactions.create');
+        ->name('investments.transactions.create');
 });
 
 Route::get('nbp/{day?}', function($day = null) {
