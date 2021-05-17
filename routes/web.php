@@ -39,4 +39,8 @@ Route::get('nbp/{day?}', function($day = null) {
     //(new \App\Services\NBPCurrenciesService())->fetchPeriod('2021-04-19', '2021-04-25');
 });
 
+Route::get('nbp/{start}/{stop}', function($start, $stop) {
+    (new \App\Services\NBPCurrenciesService())->fetchPeriod($start, $stop);
+});
+
 require __DIR__.'/auth.php';

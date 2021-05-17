@@ -23,7 +23,7 @@ class RegisterTransactionService
         switch ($type)
         {
             case 'fiat':
-                $this->buyFiat($asset['currency'], $asset['quantity'], $payment['currency'], $payment['quantity']);
+                $this->buyFiat($asset['currency']['id'], $asset['quantity'], $payment['currency']['id'], $payment['quantity']);
                 break;
 
             default:
@@ -31,41 +31,47 @@ class RegisterTransactionService
         }
     }
 
-    private function buyFiat($fiat, $fiatQuantity, $currency, $currencyQuantity)
+    private function buyFiat($fiatId, $fiatQuantity, $currencyId, $currencyQuantity)
     {
-        if ($asset = $this->user->getAssetByName($fiat['name']))
+        $currency = Resource::findOrFail($currencyId);
+        $fiat = Resource::findOrFail($fiatId);
+        $priceInPLN = $currencyQuantity * $currency->valuations()->latest()->first()->amount;
+
+        if ($asset = $this->user->getAssetByName($fiat->name))
         {
             $asset->update([
-                'quantity' => $asset->quantity += $fiatQuantity,
-                'unit_price' => $asset->quantity += $fiatQuantity
+                'quantity' => $asset->quantity + $fiatQuantity,
+                'unit_price' => ($asset->quantity * $asset->unit_price + $priceInPLN) / ($asset->quantity + $fiatQuantity)
             ]);
         } else {
             $asset = Asset::create([
-                'name' => $fiat['name'],
+                'name' => $fiat->name,
                 'user_id' => $this->user->id,
-                'resource_id' => $fiat['id'],
+                'resource_id' => $fiat->id,
                 'quantity' => $fiatQuantity,
-                'unit_price' => $fiatQuantity,
+                'unit_price' => $priceInPLN / $fiatQuantity,
             ]);
         }
 
         if ($userCurrency= $this->user->currencies()->where('resource_id', $currency['id'])->first())
         {
             $userCurrency->update([
-                'quantity' => $userCurrency->quantity -= $currencyQuantity
+                'quantity' => $userCurrency->quantity - $currencyQuantity,
+                'unit_price' => (abs($userCurrency->quantity) * $userCurrency->unit_price + $priceInPLN) / (abs($userCurrency->quantity) + $currencyQuantity)
             ]);
         } else {
             Asset::create([
-                'name' => $currency['name'],
+                'name' => $currency->name,
                 'user_id' => $this->user->id,
-                'resource_id' => $currency['id'],
+                'resource_id' => $currency->id,
                 'quantity' => - $currencyQuantity,
+                'unit_price' => $priceInPLN / $currencyQuantity,
             ]);
         }
 
         activity('investments')
             ->causedBy(auth()->user())
             ->performedOn($asset)
-            ->log('You have bought ' . $fiatQuantity . ' ' . $asset->name . ' for ' . $currencyQuantity . ' ' . $currency['name']);
+            ->log('You have bought ' . $fiatQuantity . ' ' . $asset->name . ' for ' . $currencyQuantity . ' ' . $currency->name);
     }
 }

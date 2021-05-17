@@ -9,6 +9,8 @@ class Resource extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['currency_id', 'name', 'type'];
+
     public function valuations()
     {
         return $this->morphMany(Valuation::class, 'valuationable');
