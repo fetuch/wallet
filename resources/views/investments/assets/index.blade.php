@@ -118,11 +118,13 @@
                             </td>
 
                             <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                aktualny kurs
+                                @if($element->valuation)
+                                    {{ number_format($element->valuation->amount, 4, ',', ' ') }} PLN
+                                @endif
                             </td>
 
                             <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                śr. koszt nabycia
+                                {{ number_format($element->unit_price, 4, ',', ' ') }}
                             </td>
 
                             <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
@@ -134,8 +136,8 @@
 
                             <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
                                 <div class="flex flex-col">
-                                    <span>4 567,56</span>
-                                    <span class="text-xs font-medium text-gray-500">(1.45 PLN)</span>
+                                    <span>{{ number_format($element->quantity, 2) }}</span>
+                                    <span class="text-xs font-medium text-gray-500">({{ number_format($element->quantity * $element->unit_price, 2, ',', ' ') }} PLN)</span>
                                 </div>
                             </td>
                         </tr>

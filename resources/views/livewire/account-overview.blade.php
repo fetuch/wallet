@@ -20,7 +20,7 @@
                             </dt>
                             <dd>
                                 <div class="flex items-baseline text-lg font-medium text-gray-900">
-                                    <span>{{ $valuation }} PLN</span>
+                                    <span>{{ number_format($valuation, 2, ',', ' ') }} PLN</span>
 
                                     <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
                                         <svg class="self-center flex-shrink-0 h-5 w-5 text-green-500"

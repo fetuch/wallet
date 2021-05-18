@@ -72,6 +72,6 @@ class RegisterTransactionService
         activity('investments')
             ->causedBy(auth()->user())
             ->performedOn($asset)
-            ->log('You have bought ' . $fiatQuantity . ' ' . $asset->name . ' for ' . $currencyQuantity . ' ' . $currency->name);
+            ->log('You have bought ' . number_format($fiatQuantity, 2, ',', ' ') . ' ' . $asset->name . ' for ' . number_format($currencyQuantity, 2, ',', ' ') . ' ' . $currency->name);
     }
 }

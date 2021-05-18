@@ -38,48 +38,14 @@ class WalletService
                 'user_id' => $this->user->id,
                 'resource_id' => $resource->id,
                 'quantity' => $quantity,
+                'unit_price' => $resource->valuations()->latest('date')->first()->amount,
             ]);
         }
 
         activity('investments')
             ->causedBy(auth()->user())
             ->performedOn($asset)
-            ->log('You have added ' . $quantity . ' ' . $asset->name . ' to your wallet');
-    }
-
-    public function buy($assetName, $assetQuantity, $currency, $currencyQuantity)
-    {
-        if ($asset= $this->user->getAssetByName($assetName))
-        {
-            $asset->update([
-                'quantity' => $asset->quantity += $assetQuantity
-            ]);
-        } else {
-            $asset = Asset::create([
-                'name' => $assetName,
-                'user_id' => $this->user->id,
-                'quantity' => $assetQuantity,
-            ]);
-        }
-
-        if ($userCurrency= $this->user->currencies()->where('resource_id', $currency->id)->first())
-        {
-            $userCurrency->update([
-                'quantity' => $userCurrency->quantity -= $currencyQuantity
-            ]);
-        } else {
-            Asset::create([
-                'name' => $currency->name,
-                'user_id' => $this->user->id,
-                'resource_id' => $currency->id,
-                'quantity' => - $currencyQuantity,
-            ]);
-        }
-
-        activity('investments')
-            ->causedBy(auth()->user())
-            ->performedOn($asset)
-            ->log('You have bought ' . $assetQuantity . ' ' . $assetName . ' for ' . $currencyQuantity . ' ' . $currency->name);
+            ->log('You have added ' . number_format($quantity, 2, ',', ' ') . ' ' . $asset->name . ' to your wallet');
     }
 
     public function computeValuation()
