@@ -24,8 +24,8 @@ class CreateAssetsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('resource_id')->references('id')->on('resources')->onDelete('set null');
-            $table->index(['name', 'user_id']);
-            $table->unique(['name', 'user_id']);
+            $table->index(['name', 'user_id', 'resource_id']);
+            $table->unique(['name', 'user_id', 'resource_id']);
         });
     }
 

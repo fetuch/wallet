@@ -51,7 +51,9 @@ class ResourcesTableSeeder extends Seeder
 ('INR', 'fiat currency', '2020-12-07 22:43:21', '2020-12-07 22:43:21'),
 ('KRW', 'fiat currency', '2020-12-07 22:43:21', '2020-12-07 22:43:21'),
 ('CNY', 'fiat currency', '2020-12-07 22:43:21', '2020-12-07 22:43:21'),
-('XDR', 'fiat currency', '2020-12-07 22:43:21', '2020-12-07 22:43:21');";
+('XDR', 'fiat currency', '2020-12-07 22:43:21', '2020-12-07 22:43:21'),
+('gold', 'precious metal', '2020-12-07 22:43:21', '2020-12-07 22:43:21'),
+('silver', 'precious metal', '2020-12-07 22:43:21', '2020-12-07 22:43:21');";
 
         DB::statement($query);
 

@@ -31,7 +31,7 @@ class RegisterBuyTransaction extends Component
             'name' => 'fiat currencies',
             'description' => 'USD, EURO, PLN...'
         ],
-        'precious metals' => [
+        'precious metal' => [
             'name' => 'precious metals',
             'description' => 'gold & silver'
         ],

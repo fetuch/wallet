@@ -68,6 +68,10 @@
                     @if($selectedType === 'fiat')
                         <livewire:investments.buy-currency/>
                     @endif
+
+                    @if($selectedType === 'precious metal')
+                        <livewire:investments.buy-precious-metal/>
+                    @endif
                 </div>
             @endif
 

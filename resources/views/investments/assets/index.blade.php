@@ -87,6 +87,10 @@
                         </th>
 
                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            {{ ucfirst(__('quantity')) }}
+                        </th>
+
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             {{ ucfirst(__('rate')) }}
                         </th>
 
@@ -110,34 +114,49 @@
                             <td class="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 <div class="flex">
                                     <span class="group inline-flex space-x-2 truncate text-sm">
-                                        <p class="text-gray-500 truncate group-hover:text-gray-900">
-                                            {{ $element->name }}
+                                        <p class="text-gray-500 truncate">
+                                            {{ $element->name }} @if($element->resource && $element->resource->type === 'precious metal') ({{ $element->resource->name }}) @endif
                                         </p>
                                     </span>
                                 </div>
                             </td>
 
                             <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                @if($element->valuation)
-                                    {{ number_format($element->valuation->amount, 4, ',', ' ') }} PLN
-                                @endif
-                            </td>
-
-                            <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                {{ number_format($element->unit_price, 4, ',', ' ') }}
-                            </td>
-
-                            <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                <div class="text-green-600 flex flex-col">
-                                    <span>10.4%</span>
-                                    <span class="text-xs font-medium">(1.45 PLN)</span>
+                                <div class="flex flex-col">
+                                    <span>{{ number_format($element->quantity, 2, ',', ' ') }}</span>
+                                    <span class="text-xs font-medium">Szt.</span>
                                 </div>
                             </td>
 
                             <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
                                 <div class="flex flex-col">
-                                    <span>{{ number_format($element->quantity, 2) }}</span>
-                                    <span class="text-xs font-medium text-gray-500">({{ number_format($element->quantity * $element->unit_price, 2, ',', ' ') }} PLN)</span>
+                                    @if($element->valuation)
+                                        <span>{{ number_format($element->valuation->amount, 2, ',', ' ') }}</span>
+                                        <span class="text-xs font-medium">PLN</span>
+                                    @endif
+                                </div>
+                            </td>
+
+                            <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex flex-col">
+                                    <span>{{ number_format($element->unit_price, 2, ',', ' ') }}</span>
+                                    <span class="text-xs font-medium">PLN</span>
+                                </div>
+                            </td>
+
+                            <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
+                                <div class="@if(optional($element->valuation)->amount >= $element->unit_price) text-green-600 @else text-red-600 @endif flex flex-col">
+                                    <span>{{ number_format(((optional($element->valuation)->amount - $element->unit_price) / $element->unit_price) * 100, 2, ',', ' ') }}%</span>
+                                    <span class="text-xs font-medium">({{ number_format($element->quantity * (optional($element->valuation)->amount - $element->unit_price), 2, ',', ' ') }} PLN)</span>
+                                </div>
+                            </td>
+
+                            <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex flex-col">
+                                    <span>{{ number_format($element->quantity * optional($element->valuation)->amount, 2, ',', ' ') }}</span>
+                                    <span class="text-xs font-medium text-gray-500">
+                                        PLN
+                                    </span>
                                 </div>
                             </td>
                         </tr>
