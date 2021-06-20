@@ -98,6 +98,7 @@ class RegisterTransactionService
                 'resource_id' => $metal->id,
                 'quantity' => $metalQuantity,
                 'unit_price' => $priceInPLN / $metalQuantity,
+                'unit' => 'ounce',
             ]);
         }
 
@@ -114,6 +115,7 @@ class RegisterTransactionService
                 'resource_id' => $currency->id,
                 'quantity' => - $currencyQuantity,
                 'unit_price' => $priceInPLN / $currencyQuantity,
+                'unit' => 'ounce',
             ]);
         }
 

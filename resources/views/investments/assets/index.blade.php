@@ -1,4 +1,6 @@
 <x-dashboard-layout>
+    <livewire:account-overview />
+
     <h1 class="text-lg leading-6 font-medium text-gray-900">
         {{ ucfirst(__('your asset list')) }}
     </h1>
@@ -87,7 +89,7 @@
                         </th>
 
                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            {{ ucfirst(__('quantity')) }}
+                            {{ ucfirst(__('amount')) }}
                         </th>
 
                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -124,7 +126,7 @@
                             <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
                                 <div class="flex flex-col">
                                     <span>{{ number_format($element->quantity, 2, ',', ' ') }}</span>
-                                    <span class="text-xs font-medium">Szt.</span>
+                                    @if($element->unit)<span class="text-xs font-medium">{{ __($element->unit) }}</span>@endif
                                 </div>
                             </td>
 

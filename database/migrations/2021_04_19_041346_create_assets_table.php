@@ -20,6 +20,7 @@ class CreateAssetsTable extends Migration
             $table->foreignId('resource_id')->nullable()->index();
             $table->double('quantity', 18,8);
             $table->double('unit_price', 18,8);
+            $table->string('unit')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

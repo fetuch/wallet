@@ -9,7 +9,7 @@ class Asset extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'quantity', 'user_id', 'resource_id', 'unit_price'];
+    protected $fillable = ['name', 'quantity', 'user_id', 'resource_id', 'unit_price', 'unit'];
 
     public function resource()
     {
@@ -19,5 +19,10 @@ class Asset extends Model
     public function valuations()
     {
         return $this->morphMany(Valuation::class, 'valuationable');
+    }
+
+    public function scopePositive($query)
+    {
+        return $query->where('quantity', '>', 0);
     }
 }
