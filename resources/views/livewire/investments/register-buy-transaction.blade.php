@@ -72,6 +72,10 @@
                     @if($selectedType === 'precious metal')
                         <livewire:investments.buy-precious-metal/>
                     @endif
+
+                    @if($selectedType === 'stock')
+                        <livewire:investments.buy-company-shares/>
+                    @endif
                 </div>
             @endif
 
