@@ -9,10 +9,8 @@ class Valuation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['valuationable_id', 'valuationable_type', 'currency_id', 'date', 'amount'];
-
-    public function valuationable()
-    {
-        return $this->morphTo();
-    }
+    /**
+     * @var string[]
+     */
+    protected $fillable = ['resource_id', 'currency_id', 'date', 'amount'];
 }

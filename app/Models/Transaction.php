@@ -9,5 +9,8 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array
+     */
     protected $guarded = [];
 }

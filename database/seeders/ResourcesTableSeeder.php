@@ -58,8 +58,7 @@ class ResourcesTableSeeder extends Seeder
         DB::statement($query);
 
         \App\Models\Valuation::create([
-            'valuationable_id' => 1,
-            'valuationable_type' => Resource::class,
+            'resource_id' => 1,
             'date' => now(),
             'amount' => 1
         ]);

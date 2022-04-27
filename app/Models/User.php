@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -41,16 +43,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function assets()
+    /**
+     * @return HasMany
+     */
+    public function assets(): HasMany
     {
         return $this->hasMany(Asset::class);
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return bool
      */
-    public function hasAsset($name)
+    public function hasAsset(string $name): bool
     {
         return $this->assets()
             ->where('name', $name)
@@ -59,7 +64,7 @@ class User extends Authenticatable
 
     /**
      * @param $name
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\HasMany|object|null
+     * @return Model|HasMany|object|null
      */
     public function getAssetByName($name)
     {

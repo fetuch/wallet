@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+
 class TransactionsController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         return view('investments.transactions.index');
     }
 
-    public function create()
+    /**
+     * @return View
+     */
+    public function create(): View
     {
         return view('investments.transactions.create');
     }

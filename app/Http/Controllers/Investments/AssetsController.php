@@ -13,14 +13,9 @@ class AssetsController extends Controller
             ->with('resource')
             ->get();
 
-        // TODO:
         foreach($assets as $asset)
         {
-            if( $asset->resource) {
-                $asset->valuation = $asset->resource->valuations()->latest('date')->first();
-            } else {
-                $asset->valuation = $asset->valuations()->latest('date')->first();
-            }
+            $asset->valuation = $asset->resource->current_valuation;
         }
 
         return view('investments.assets.index', compact('assets'));
